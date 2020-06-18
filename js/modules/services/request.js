@@ -21,6 +21,7 @@ function checkNet() {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
+  let newUrl = url;
   const status = checkNet();
   if (!status) {
     return new Promise(res => {
@@ -28,8 +29,8 @@ export default function request(url, options) {
       res({ msg: 'fail' });
     });
   }
-  if (!url.startsWith('http')) {
-    url = Config.API_URL + url;
+  if (!newUrl.startsWith('http')) {
+    newUrl = Config.API_URL + newUrl;
   }
   const defaultOptions = {};
   const newOptions = { ...defaultOptions, ...options };
@@ -42,7 +43,7 @@ export default function request(url, options) {
 
   console.log(' ============ request ============ ', { url, newOptions });
   return Promise.race([
-    fetch(url, newOptions),
+    fetch(newUrl, newOptions),
     new Promise((resolve, reject) => {
       setTimeout(() => {
         reject(new Error('Request Timeout'));

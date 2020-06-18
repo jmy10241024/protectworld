@@ -3854,6 +3854,11 @@ image-size@^0.6.0:
   resolved "https://registry.npm.taobao.org/image-size/download/image-size-0.6.3.tgz#e7e5c65bb534bd7cdcedd6cb5166272a85f75fb2"
   integrity sha1-5+XGW7U0vXzc7dbLUWYnKoX3X7I=
 
+immer@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.npm.taobao.org/immer/download/immer-7.0.1.tgz#830f44a36c4181c0eca4385e7782e164e5eb9249"
+  integrity sha1-gw9Eo2xBgcDspDhed4LhZOXrkkk=
+
 immutable@~3.7.6:
   version "3.7.6"
   resolved "https://registry.npm.taobao.org/immutable/download/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
@@ -7401,6 +7406,11 @@ urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npm.taobao.org/urix/download/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
+
+use-immer@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.npm.taobao.org/use-immer/download/use-immer-0.4.0.tgz#9992280c2d8b5777e5bfc4827c69dbdcc1b219eb"
+  integrity sha1-mZIoDC2LV3flv8SCfGnb3MGyGes=
 
 use-subscription@^1.0.0:
   version "1.4.1"

@@ -44,8 +44,15 @@ function getHeader(store) {
   return headers;
 }
 
+function getSessionId(store) {
+  const { sessionid } = store.getState().userInfo;
+
+  return sessionid;
+}
+
 module.exports = {
   filterUrl,
   filterBody,
   getHeader,
+  getSessionId,
 };

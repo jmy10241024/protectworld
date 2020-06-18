@@ -6,7 +6,12 @@ import { useNavigation } from 'react-navigation-hooks';
 function AuthLoadingScreen() {
   const { navigate } = useNavigation();
   const userInfo = useSelector(state => state.userInfo, shallowEqual);
-  const { user } = userInfo;
+  const { sessionid } = userInfo;
+  if (sessionid) {
+    navigate('main', { transition: 'forFade' });
+  } else {
+    navigate('pageLogin', { transition: 'forFade' });
+  }
   // 强制登陆
   // useEffect(
   //   () => {
@@ -19,12 +24,6 @@ function AuthLoadingScreen() {
   //   [navigate, user, userInfo],
   // );
   // 非强制登陆
-  useEffect(
-    () => {
-      navigate('main', { transition: 'forFade' });
-    },
-    [navigate],
-  );
 
   return (
     <View style={styles.container}>

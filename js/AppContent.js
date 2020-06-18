@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Platform, BackHandler, ToastAndroid } from 'react-native';
 
+import { enableES5 } from 'immer';
+
 import { store } from '~/modules/redux-app-config';
 import { getRouteName } from '~/modules/services/utils';
 import AppLoading from '~/components/modal/AppLoading';
-import AppEnvModal from '~/components/modal/AppEnvModal';
+// import AppEnvModal from '~/components/modal/AppEnvModal';
 import EyesProtect from '~/components/modal/eyes-protect';
 
 import AppWithNavigationState from './AppRouter';
@@ -23,6 +25,7 @@ const onBackAndroid = () => {
 
 function AppContent() {
   useEffect(() => {
+    enableES5();
     if (Platform.OS === 'android') {
       BackHandler.addEventListener('hardwareBackPress', onBackAndroid);
     }
@@ -36,7 +39,7 @@ function AppContent() {
         <AppWithNavigationState />
       </View>
       <AppLoading />
-      <AppEnvModal />
+      {/* <AppEnvModal /> */}
       <EyesProtect />
     </View>
   );

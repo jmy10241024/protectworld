@@ -1,5 +1,8 @@
+import _ from 'lodash';
+
 const defaultUser = {
-  user: '',
+  sessionid: '',
+  account: {},
 };
 
 export const userInfo = {
@@ -7,10 +10,10 @@ export const userInfo = {
   persist: true,
   actions: {
     UPDATE_USER: {
-      inputs: ['user'],
       reducer: (state, { payload }) => ({
         ...state,
-        ...payload.user,
+        sessionid: payload.sessionid,
+        account: _.cloneDeep(payload.account),
       }),
     },
     USER_LOGOUT_NOW: {

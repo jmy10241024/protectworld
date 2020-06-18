@@ -12,6 +12,10 @@ import {
 } from 'react-native';
 
 import { useNavigation } from 'react-navigation-hooks';
+import { useSelector, shallowEqual } from 'react-redux';
+import _ from 'lodash';
+import { useImmer } from 'use-immer';
+import { Toast } from 'teaset';
 
 import actions, { dispatch } from '~/modules/redux-app-config';
 import UI from '~/modules/UI';
@@ -84,18 +88,52 @@ const logoImg = require('./img/logo.png');
 
 function PageLogin() {
   const { navigate } = useNavigation();
-  const login = () => {
-    Keyboard.dismiss();
-    dispatch('SET_LOADING', { visible: true });
-    dispatch('USER_LOGIN', {
-      mobile: '13300000000',
-      password: '123456',
-      res: () => {
-        dispatch('SET_LOADING', { visible: false });
-        navigate('main', { transition: 'forFade' });
-      },
+
+  const [inputs, updateInputs] = useImmer({
+    username: '',
+    password: '',
+  });
+
+  const onUserNameChanged = text => {
+    updateInputs(draft => {
+      let newDraft = draft;
+      newDraft.username = text;
     });
   };
+
+  const onPasswordChanged = text => {
+    updateInputs(draft => {
+      let newDraft = draft;
+      newDraft.password = text;
+    });
+  };
+
+  const login = () => {
+    Keyboard.dismiss();
+    const { username, password } = inputs;
+    if (username.length !== 11) {
+      Toast.fail('账号为11位手机号');
+      return;
+    }
+    if (!password.length) {
+      Toast.fail('请输入密码');
+      return;
+    }
+    dispatch('SET_LOADING', { visible: true });
+    dispatch('USER_LOGIN', {
+      username,
+      password,
+      res: res => {
+        if (res.ret === 1) {
+          Toast.success(res.tip);
+        } else {
+          Toast.fail(res.tip);
+        }
+      },
+    });
+    dispatch('SET_LOADING', { visible: false });
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView
@@ -112,6 +150,7 @@ function PageLogin() {
           keyboardType="email-address"
           autoCorrect={false}
           maxLength={11}
+          onChangeText={onUserNameChanged}
         />
         <TextInput
           style={styles.password}
@@ -120,6 +159,7 @@ function PageLogin() {
           // keyboardType="email-address"
           autoCorrect={false}
           secureTextEntry
+          onChangeText={onPasswordChanged}
         />
         <TouchableOpacity onPress={login} style={styles.btnView} activeOpacity={1}>
           <Text style={styles.loginText}>{i18n.t('login.login')}</Text>
