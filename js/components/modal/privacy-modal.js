@@ -30,7 +30,7 @@ class PrivacyModal extends Component {
     this.props.navigation.navigate('myWeb', {
       url:
         index === 0
-          ? 'https://r-read.dubaner.com/wechat/static/protocol.htm'
+          ? 'https://guoshuyu.cn/home/index/privacy.html'
           : 'https://guoshuyu.cn/home/index/privacy.html',
     });
   };

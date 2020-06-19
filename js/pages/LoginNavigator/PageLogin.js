@@ -20,74 +20,12 @@ import { Toast } from 'teaset';
 import actions, { dispatch } from '~/modules/redux-app-config';
 import UI from '~/modules/UI';
 import i18n from '~/i18n';
+import NavigationHeader from '~/components/navigation-header-hook';
 
 const logoImg = require('./img/logo.png');
 
-// @connect(
-//   R.pick(['']),
-//   actions,
-// )
-// class PageLogin extends Component {
-//   static navigationOptions = ({ navigation }) => ({
-//     header: null,
-//   });
-
-//   constructor(props) {
-//     super(props);
-//     this.state = {};
-//     this.login = this.login.bind(this);
-//   }
-
-//   login() {
-//     Keyboard.dismiss();
-//     dispatch('SET_LOADING', { visible: true });
-//     dispatch('USER_LOGIN', {
-//       mobile: '13300000000',
-//       password: '123456',
-//       res: () => {
-//         dispatch('SET_LOADING', { visible: false });
-//         this.props.navigation.navigate('main');
-//       },
-//     });
-//   }
-
-//   render() {
-//     return (
-//       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-//         <KeyboardAvoidingView
-//           style={styles.container}
-//           behavior="position"
-//           keyboardVerticalOffset={-UI.scaleSize(110) - UI.size.statusBarHeight - UI.scaleSize(20)}
-//         >
-//           <View style={{ paddingBottom: UI.scaleSize(110) }} />
-//           <Image source={logoImg} style={styles.logoImg} />
-//           <TextInput
-//             style={styles.email}
-//             placeholder={i18n.t('login.email')}
-//             placeholderTextColor={UI.color.text3}
-//             keyboardType="email-address"
-//             autoCorrect={false}
-//             maxLength={11}
-//           />
-//           <TextInput
-//             style={styles.password}
-//             placeholder={i18n.t('login.password')}
-//             placeholderTextColor={UI.color.text3}
-//             // keyboardType="email-address"
-//             autoCorrect={false}
-//             secureTextEntry
-//           />
-//           <TouchableOpacity onPress={this.login} style={styles.btnView} activeOpacity={1}>
-//             <Text style={styles.loginText}>{i18n.t('login.login')}</Text>
-//           </TouchableOpacity>
-//         </KeyboardAvoidingView>
-//       </TouchableWithoutFeedback>
-//     );
-//   }
-// }
-
 function PageLogin() {
-  const { navigate } = useNavigation();
+  const { navigate, goBack } = useNavigation();
 
   const [inputs, updateInputs] = useImmer({
     username: '',
@@ -124,10 +62,11 @@ function PageLogin() {
       username,
       password,
       res: res => {
-        if (res.ret === 1) {
+        if (res) {
+          if (res.ret === 1) {
+            goBack();
+          }
           Toast.success(res.tip);
-        } else {
-          Toast.fail(res.tip);
         }
       },
     });
@@ -147,7 +86,7 @@ function PageLogin() {
           style={styles.email}
           placeholder={i18n.t('login.email')}
           placeholderTextColor={UI.color.text3}
-          keyboardType="email-address"
+          keyboardType="number-pad"
           autoCorrect={false}
           maxLength={11}
           onChangeText={onUserNameChanged}
@@ -164,6 +103,7 @@ function PageLogin() {
         <TouchableOpacity onPress={login} style={styles.btnView} activeOpacity={1}>
           <Text style={styles.loginText}>{i18n.t('login.login')}</Text>
         </TouchableOpacity>
+        <NavigationHeader />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );

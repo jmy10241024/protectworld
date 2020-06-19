@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator } f
 import { WebView } from 'react-native-webview';
 
 import UI from '~/modules/UI';
+import NavigationHeader from '~/components/navigation-header-hook';
 
 const backImg = require('~/images/back.png');
 
@@ -25,7 +26,8 @@ class MyWeb extends Component {
     const { loadEnd } = this.state;
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ height: UI.size.statusBarHeight + UI.scaleSize(6) }} />
+        <View style={{ height: UI.scaleSize(60) }} />
+
         <WebView
           ref={o => {
             this.webView = o;
@@ -38,6 +40,7 @@ class MyWeb extends Component {
             this.setState({ loadEnd: true });
           }}
         />
+        <NavigationHeader />
         {!loadEnd && (
           <View style={styles.position}>
             <ActivityIndicator size="large" color={UI.color.primary2} />

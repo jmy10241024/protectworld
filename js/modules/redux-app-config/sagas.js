@@ -4,11 +4,13 @@ import api from '~/modules/api';
 
 export function* userLogin(actions) {
   const { payload = {} } = actions;
+  const { username, password } = payload;
   const res = yield call(api.login, payload);
-  console.log('====......res: ', res);
-
   if (res && res.ret === 1) {
-    yield put({ type: 'UPDATE_USER', payload: { sessionid: res.sessionid, account: res.account } });
+    yield put({
+      type: 'UPDATE_USER',
+      payload: { sessionid: res.sessionid, account: res.account, username, password },
+    });
   }
   payload.res && payload.res(res);
 }

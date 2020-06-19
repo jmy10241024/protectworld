@@ -31,33 +31,34 @@ const TransitionConfiguration = () => ({
   },
 });
 
-// 登录模块路由
-const LoginNavigator = createStackNavigator(
-  {
-    pageLogin: { screen: PageLogin },
-  },
-  {
-    initialRouteName: 'pageLogin',
-    headerMode: 'screen',
-    mode: 'card',
-    headerLayoutPreset: 'center',
-    navigationOptions: {
-      gesturesEnabled: false,
-      headerStyle: {
-        elevation: 0,
-        shadowOpacity: 0,
-      },
-    },
-    defaultNavigationOptions: {
-      header: null,
-    },
-  },
-);
+// // 登录模块路由
+// const LoginNavigator = createStackNavigator(
+//   {
+//     pageLogin: { screen: PageLogin },
+//   },
+//   {
+//     initialRouteName: 'pageLogin',
+//     headerMode: 'screen',
+//     mode: 'card',
+//     headerLayoutPreset: 'center',
+//     navigationOptions: {
+//       gesturesEnabled: false,
+//       headerStyle: {
+//         elevation: 0,
+//         shadowOpacity: 0,
+//       },
+//     },
+//     defaultNavigationOptions: {
+//       header: null,
+//     },
+//   },
+// );
 
 export const MainNavigator = createStackNavigator(
   {
     tab: { screen: TabNavigator },
     myWeb: { screen: MyWeb },
+    pageLogin: { screen: PageLogin },
   },
   {
     initialRouteName: 'tab',
@@ -86,7 +87,7 @@ const appRouteParams = {
 };
 export const AppNavigator = createSwitchNavigator(
   {
-    login: { screen: LoginNavigator },
+    // login: { screen: LoginNavigator },
     main: { screen: MainNavigator },
     auth: { screen: AuthLoading },
   },
