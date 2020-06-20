@@ -9,6 +9,7 @@ import i18n from '~/i18n';
 import UI from '~/modules/UI';
 import PrivacyModal from '~/components/modal/privacy-modal';
 import actions, { dispatch } from '~/modules/redux-app-config';
+import MyTouchable from '~/components/my-touchable';
 
 const accountImg = require('~/images/account.png');
 
@@ -70,6 +71,20 @@ class Home extends Component {
     }
     return (
       <View style={styles.container}>
+        <View style={styles.main}>
+          {course.map((item, index) => {
+            const arr = _.toArray(item);
+            return (
+              <MyTouchable key={arr[0]} style={styles.item}>
+                {arr.map((itemSub, indexSub) => (
+                  <Text key={`${itemSub}${indexSub}`} style={styles.text}>
+                    {itemSub}
+                  </Text>
+                ))}
+              </MyTouchable>
+            );
+          })}
+        </View>
         <PrivacyModal
           visible={privacyVisible}
           navigation={this.props.navigation}
@@ -83,12 +98,30 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingTop: UI.scaleSize(80),
   },
   icon: {
     width: UI.scaleSize(28),
     height: UI.scaleSize(28),
+  },
+  main: {
+    flex: 1,
+  },
+  item: {
+    alignItems: 'center',
+    paddingHorizontal: UI.scaleSize(8),
+    shadowColor: UI.color.black,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 4,
+  },
+  text: {
+    fontSize: UI.scaleSize(18),
+    color: '#000',
+    fontWeight: 'bold',
+    lineHeight: UI.scaleSize(20),
+    letterSpacing: UI.scaleSize(2),
   },
 });
 
