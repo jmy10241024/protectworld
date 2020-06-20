@@ -25,6 +25,24 @@ export function* userLogout(actions) {
   payload.res && payload.res(res);
 }
 
+// 课程列表
+export function* courseList(actions) {
+  const { payload = {} } = actions;
+  const res = yield call(api.courseList, payload);
+  if (res && res.ret === 1) {
+    yield put({
+      type: 'UPDATE_COURSES',
+      payload: { courses: res.data },
+    });
+  }
+  payload.res && payload.res(res);
+}
+
 export default function* rootSaga() {
-  yield all([takeEvery('USER_LOGIN', userLogin), takeEvery('USER_LOGOUT', userLogout)]);
+  yield all([
+    takeEvery('GET_COURSE_LIST', courseList),
+
+    takeEvery('USER_LOGIN', userLogin),
+    takeEvery('USER_LOGOUT', userLogout),
+  ]);
 }

@@ -7,7 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import i18n from '~/i18n';
 import UI from '~/modules/UI';
-import actions from '~/modules/redux-app-config';
+import actions, { dispatch } from '~/modules/redux-app-config';
 import MyTouchable from '~/components/my-touchable';
 
 const accountImg = require('~/images/account.png');
@@ -40,7 +40,15 @@ class Account extends Component {
     this.props.navigation.navigate('pageLogin');
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    dispatch('SET_LOADING', { visible: true });
+    dispatch('GET_COURSE_LIST', {
+      page: 1,
+      pageSize: 10,
+      res: res => {},
+    });
+    dispatch('SET_LOADING', { visible: false });
+  }
 
   render() {
     const { deviceInfo, userInfo } = this.props;

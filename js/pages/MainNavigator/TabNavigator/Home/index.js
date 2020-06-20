@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+
 import R from 'ramda';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import i18n from '~/i18n';
 import UI from '~/modules/UI';
@@ -11,7 +13,7 @@ import actions, { dispatch } from '~/modules/redux-app-config';
 const accountImg = require('~/images/account.png');
 
 @connect(
-  R.pick(['userInfo', 'deviceInfo']),
+  R.pick(['userInfo', 'deviceInfo', 'course']),
   actions,
 )
 class Home extends Component {
@@ -46,15 +48,28 @@ class Home extends Component {
     if (!deviceInfo.acceptPrivacy) {
       this.setState({ privacyVisible: true });
     }
+    dispatch('SET_LOADING', { visible: true });
+    dispatch('GET_COURSE_LIST', {
+      page: 1,
+      pageSize: 10,
+      res: res => {},
+    });
+    dispatch('SET_LOADING', { visible: false });
   }
 
   render() {
     const { privacyVisible } = this.state;
-    const { navigation } = this.props;
-    console.log('navigation: ', navigation);
+    const { navigation, course } = this.props;
+    const { courses } = course;
+    if (_.isEmpty(courses)) {
+      return (
+        <View style={styles.container}>
+          <Text>暂无数据</Text>
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
-        <Text>Home</Text>
         <PrivacyModal
           visible={privacyVisible}
           navigation={this.props.navigation}

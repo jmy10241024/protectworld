@@ -4,4 +4,5 @@ module.exports = {
   ...require('./net-info-status'),
   ...require('./user-info'),
   ...require('./settings'),
+  ...require('./course'),
 };

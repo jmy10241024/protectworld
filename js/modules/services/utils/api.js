@@ -45,9 +45,9 @@ function getHeader(store) {
 }
 
 function getSessionId(store) {
-  const { sessionid } = store.getState().userInfo;
+  const { sessionId } = store.getState().userInfo;
 
-  return sessionid;
+  return sessionId;
 }
 
 module.exports = {
