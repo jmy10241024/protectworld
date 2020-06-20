@@ -17,6 +17,16 @@ async function courseList(params) {
   });
 }
 
+// 开始课程1
+async function courseStart(params) {
+  let newParams = params;
+  newParams.sessionid = getSessionId(store);
+  const url = filterUrl(newParams);
+  return request(`${API_URL}/mobile/courseware/start/study?${url}`, {
+    method: 'POST',
+  });
+}
+
 async function logout(params) {
   return request('/user/logout', {
     method: 'POST',
@@ -27,5 +37,6 @@ async function logout(params) {
 
 module.exports = {
   courseList,
+  courseStart,
   logout,
 };

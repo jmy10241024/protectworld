@@ -16,10 +16,13 @@ export const course = {
       }),
     },
     UPDATE_COURSE_IDS: {
-      reducer: (state, { payload }) => ({
-        ...state,
-        courseIds: _.cloneDeep(payload.courseIds),
-      }),
+      reducer: (state, { payload }) => {
+        console.log('fuck==state: ', state);
+        return {
+          ...state,
+          courseIds: payload,
+        };
+      },
     },
   },
 };

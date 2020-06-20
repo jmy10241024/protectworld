@@ -15,6 +15,8 @@ import AuthLoading from '~/pages/AuthLoading.js';
 import PageLogin from '~/pages/LoginNavigator/PageLogin';
 import TabNavigator from '~/pages/MainNavigator/TabNavigator';
 import MyWeb from '~/components/my-web'; // 加载h5页面
+import Course from '~/pages/MainNavigator/TabNavigator/Home/pages/Course';
+import Task from '~/pages/MainNavigator/TabNavigator/Home/pages/Task';
 
 const TransitionConfiguration = () => ({
   screenInterpolator: sceneProps => {
@@ -59,6 +61,8 @@ export const MainNavigator = createStackNavigator(
     tab: { screen: TabNavigator },
     myWeb: { screen: MyWeb },
     pageLogin: { screen: PageLogin },
+    course: { screen: Course },
+    task: { screen: Task },
   },
   {
     initialRouteName: 'tab',
