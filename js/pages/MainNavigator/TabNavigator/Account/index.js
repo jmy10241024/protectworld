@@ -53,7 +53,6 @@ class Account extends Component {
   render() {
     const { deviceInfo, userInfo } = this.props;
     const { sessionId } = userInfo;
-    console.log('userInfo: ', userInfo);
     const { uniqueId, brand } = deviceInfo;
     this.info = [{ title: '设备唯一id', value: uniqueId }, { title: '手机品牌', value: brand }];
     return (

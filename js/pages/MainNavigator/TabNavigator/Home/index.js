@@ -54,12 +54,20 @@ class Home extends Component {
   onCoursePress = () => {
     this.props.navigation.navigate('course');
   };
+  onTaskPress = () => {
+    this.props.navigation.navigate('task');
+  };
 
   render() {
     const { privacyVisible } = this.state;
     return (
       <View style={styles.container}>
-        <Text onPress={this.onCoursePress}>课程列表</Text>
+        <MyTouchable onPress={this.onCoursePress}>
+          <Text>课程列表</Text>
+        </MyTouchable>
+        <MyTouchable onPress={this.onTaskPress}>
+          <Text>任务列表</Text>
+        </MyTouchable>
         <PrivacyModal
           visible={privacyVisible}
           navigation={this.props.navigation}
@@ -74,7 +82,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingVertical: UI.scaleSize(200),
+    justifyContent: 'space-between',
   },
   icon: {
     width: UI.scaleSize(28),

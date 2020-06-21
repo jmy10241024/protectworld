@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -27,28 +27,19 @@ const logoImg = require('./img/logo.png');
 function PageLogin() {
   const { navigate, goBack } = useNavigation();
 
-  const [inputs, updateInputs] = useImmer({
-    username: '',
-    password: '',
-  });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const onUserNameChanged = text => {
-    updateInputs(draft => {
-      let newDraft = draft;
-      newDraft.username = text;
-    });
+    setUsername(text);
   };
 
   const onPasswordChanged = text => {
-    updateInputs(draft => {
-      let newDraft = draft;
-      newDraft.password = text;
-    });
+    setPassword(text);
   };
 
   const login = () => {
     Keyboard.dismiss();
-    const { username, password } = inputs;
     if (username.length !== 11) {
       Toast.fail('账号为11位手机号');
       return;

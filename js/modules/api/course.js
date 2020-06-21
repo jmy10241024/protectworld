@@ -17,12 +17,22 @@ async function courseList(params) {
   });
 }
 
-// 开始课程1
+// 开始课程
 async function courseStart(params) {
   let newParams = params;
   newParams.sessionid = getSessionId(store);
   const url = filterUrl(newParams);
   return request(`${API_URL}/mobile/courseware/start/study?${url}`, {
+    method: 'POST',
+  });
+}
+
+// 暂停课程(累加时长)
+async function courseEnd(params) {
+  let newParams = params;
+  newParams.sessionid = getSessionId(store);
+  const url = filterUrl(newParams);
+  return request(`${API_URL}/mobile/courseware/picture/pause/study?${url}`, {
     method: 'POST',
   });
 }
@@ -38,5 +48,6 @@ async function logout(params) {
 module.exports = {
   courseList,
   courseStart,
+  courseEnd,
   logout,
 };

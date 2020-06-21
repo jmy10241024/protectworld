@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const defaultCourse = {
   courses: [],
-  courseIds: [],
+  tasks: [],
 };
 
 export const course = {
@@ -17,10 +17,9 @@ export const course = {
     },
     UPDATE_COURSE_IDS: {
       reducer: (state, { payload }) => {
-        console.log('fuck==state: ', state);
         return {
           ...state,
-          courseIds: payload,
+          tasks: _.concat(state.tasks, payload),
         };
       },
     },

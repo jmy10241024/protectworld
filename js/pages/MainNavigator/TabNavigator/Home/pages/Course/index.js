@@ -57,12 +57,13 @@ function Course() {
   }
 
   const onItemPress = item => {
-    const { id, coursewareId } = item;
+    const { id, coursewareId, name } = item;
     dispatch('COURSE_START', {
       businessId: id,
       coursewareId: coursewareId,
       businessType: 6,
       coursewareType: 3,
+      name,
       res: res => {
         if (res) {
           Toast.smile(res.tip);
@@ -95,7 +96,6 @@ function Course() {
         </ScrollView>
         <View height={10} />
       </View>
-
       <NavigationHeader />
     </View>
   );
