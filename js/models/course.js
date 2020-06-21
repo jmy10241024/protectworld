@@ -23,5 +23,13 @@ export const course = {
         };
       },
     },
+    DELETE_COURSE_ID: {
+      reducer: (state, { payload }) => {
+        return {
+          ...state,
+          tasks: _.dropWhile(state.tasks, item => item.id === payload.id),
+        };
+      },
+    },
   },
 };

@@ -34,6 +34,11 @@ function Task() {
       id,
       res: res => {
         if (res) {
+          if (res.ret === 1) {
+            dispatch('DELETE_COURSE_ID', {
+              id,
+            });
+          }
           Toast.smile(res.tip);
         }
       },
